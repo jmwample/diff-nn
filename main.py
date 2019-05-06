@@ -9,7 +9,7 @@ from torchvision.utils import save_image
 import time 
 import numpy as np
 from matplotlib import pyplot as plt
-
+import csv
 
 
 class Net(nn.Module):
@@ -284,6 +284,10 @@ def main():
     # c_duration = np.arange(-2, 2, dx)
 
     # Evaluate
+    with open("stats/client_times_cl", 'w') as csvf:
+        csv_writer = csv.writer(csvf)
+        csv_writer.writerow(c_duration)
+
     plot_cdf(c_duration)
         
 if __name__ == '__main__':
