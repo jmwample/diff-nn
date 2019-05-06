@@ -1,6 +1,6 @@
 # Basic MNIST Example
 
-~Questions~:
+**Questions**:
 
 * Can we fragment a model and give a piece to the client such that they encode their data in
 a non-trivial way specifically relevant to the task that a service provider wishes to perform on that
@@ -39,9 +39,13 @@ This is done simply as we have both the orioginal as a label and the generated i
 
 Clients don't receive the entire model so there is still some ides of a proprietary model.
 
-We offload some of the computation to the client so that they can gain this benefit.
+We offload some of the computation to the client so that they can gain this benefit decreasing
+the computational load on the server.
 
+### Drawbacks
 
+We ofload some work to the client increasing the amount of work that has to be done on
+non-specialized hardware.
 
 ## Question for future work
 
