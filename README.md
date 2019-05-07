@@ -1,4 +1,12 @@
-# Basic MNIST Example
+# Just the Facts Please
+
+Conv2d to MLP
+
+Client segnment of the model involves Conv2d and Maxpool2d operations.
+
+The reverse model uses two fully connected layers to reconstruct the original image.
+
+## Basic MNIST Example
 
 **Questions**:
 
