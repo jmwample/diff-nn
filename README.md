@@ -16,7 +16,8 @@ point at which to segment the network.
 **(Step 2)** __splits the network__ into two pieces, the first (client) portion
 is transferred to the client, the second is maintained locally.
 
-**(Step 3)** To __evaluate the invertibility__ of the primary layer we construct
+
+**(Step 3)** __evaluates the invertibility__ of the primary layer we construct
 a new modeland train it on the original training data where we pass an input through
 the client segment,then pass the intermediate through the reconstruction network and
 calculate lossagainst the original input value. Loss is propagated only through the
