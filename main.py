@@ -128,7 +128,7 @@ def test_original(args, c_model, model, device, test_loader):
 
 # Reconstruction losses summed over all elements and batch
 def loss_function(recon_x, x):
-    BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784), reduction='sum')
+    BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784))
     return BCE 
 
 
@@ -245,6 +245,7 @@ def main():
     # Create model
     model = Net().to(device)
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+    optimizer_r = optim.SGD(model.parameters(), lr=1.0, momentum=args.momentum)
 
 
     # Performance Tracking
@@ -264,7 +265,7 @@ def main():
     print("\t#===============[ Reverse ]===============#")
 
     for epoch in range(1, args.epochs_r + 1):
-        train_reverse(args, r_model, c_model, device, train_loader, optimizer, epoch)
+        train_reverse(args, r_model, c_model, device, train_loader, optimizer_r, epoch)
         bce = test_reverse(args, c_model, r_model, device, test_loader, epoch)
         epoch_bce.append(bce)
 

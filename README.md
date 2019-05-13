@@ -6,6 +6,23 @@ Client segnment of the model involves Conv2d and Maxpool2d operations.
 
 The reverse model uses two fully connected layers to reconstruct the original image.
 
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/diffnn_framework.png)
+
+**(Step 1)** involves the __design and training of a model__ -- part of which
+(*step 1a.*) requires choosing the layers that will be transferred to the client. For
+***pre-trained*** models step 1 is complete given that there is a satisfactory
+point at which to segment the network.
+
+**(Step 2)** __splits the network__ into two pieces, the first (client) portion
+is transferred to the client, the second is maintained locally.
+
+**(Step 3)** __evaluates the invertibility__ of the primary layer we construct
+a new modeland train it on the original training data where we pass an input through
+the client segment,then pass the intermediate through the reconstruction network and
+calculate lossagainst the original input value. Loss is propagated only through the
+reconstruction networkas we ***do not*** wish to optimize the client model segment
+for reconstruction.
+
 ## Basic MNIST Example
 
 **Questions**:
