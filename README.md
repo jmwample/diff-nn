@@ -6,7 +6,7 @@ Client segnment of the model involves Conv2d and Maxpool2d operations.
 
 The reverse model uses two fully connected layers to reconstruct the original image.
 
-![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/diffnn_framework.png)
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/diffnn_framework.png)
 
 **(Step 1)** involves the __design and training of a model__ -- part of which
 (*step 1a.*) requires choosing the layers that will be transferred to the client. For
@@ -63,11 +63,11 @@ This is done simply as we have both the orioginal as a label and the generated i
 
 MLP Client => MLP Reconstruction:
 
-![](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/reconstruction_10_ll.png)
+![](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/reconstruction_10_ll.png)
 
 Conv2d Client => MLP Reconstruction:
 
-![](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/reconstruction_10_cl.png)
+![](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/reconstruction_10_cl.png)
 
 ## Discussion
 
