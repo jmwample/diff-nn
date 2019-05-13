@@ -6,6 +6,10 @@ Client segnment of the model involves Conv2d and Maxpool2d operations.
 
 The reverse model uses two fully connected layers to reconstruct the original image.
 
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/diffnn_framework.png)
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/diffnn-proposed.png | width=250)
+
+
 ## Basic MNIST Example
 
 **Questions**:
@@ -40,6 +44,14 @@ the reliability with which the model can be reversed by the service provider to 
 sample.
 
 This is done simply as we have both the orioginal as a label and the generated intermediary to test against.
+
+MLP Client => MLP Reconstruction:
+
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/reconstruction_10_ll.png)
+
+Conv2d Client => MLP Reconstruction:
+
+![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/readme-updates/img/reconstruction_10_cl.png)
 
 ## Discussion
 
