@@ -69,6 +69,11 @@ Conv2d Client => MLP Reconstruction:
 
 ![](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/reconstruction_10_cl.png)
 
+Conv2d Client => [maxpool, conv2d, deconv2d, maxunpool, deconv2d] Reconstruction:
+
+![](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/reconstruction_10_cc.png)
+
+
 ## Discussion
 
 ### Benefits
