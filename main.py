@@ -66,8 +66,8 @@ class RNet(nn.Module):
         h1 = F.relu(self.conv2(x))
         h2 = F.relu(self.deconv2(h1))
         h3 = self.mup1(h2, ind)
-        return torch.sigmoid(self.deconv1(h3))
-
+        h4 = torch.sigmoid(self.deconv1(h3))
+        return h4
 
 class CNet(nn.Module):
     """
@@ -133,8 +133,10 @@ def test_original(args, c_model, model, device, test_loader):
 
 # Reconstruction losses summed over all elements and batch
 def loss_function(recon_x, x):
-    BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784))
-    return BCE 
+    loss = recon_x - x
+    return torch.mean((loss)**2)
+    # BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784))
+    # return BCE 
 
 
 def train_reverse(args, r_model, c_model, device, train_loader, optimizer, epoch):
