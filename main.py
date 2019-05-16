@@ -27,12 +27,13 @@ class Net(nn.Module):
 
     def input_to_interm(self, x):
         x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2, 2)
         return x
 
     def interm_to_output(self, x):
-        x = F.relu(self.conv2(x))
         x = F.max_pool2d(x, 2, 2)
+        x = F.relu(self.conv2(x))
+        x, indices = F.max_pool2d(x, 2, 2, return_indices = True)
+        #print(indices.size(), type(indices))
         x = x.view(-1, 4*4*50)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
@@ -50,22 +51,27 @@ class RNet(nn.Module):
     """
     def __init__(self):
         super(RNet, self).__init__()
-        self.fc1 = nn.Linear(20*12*12, 400)
-        self.fc2 = nn.Linear(400, 784)
+        self.conv2 = nn.Conv2d(20, 50, 5, 1)
+        self.mp1 = nn.MaxPool2d(kernel_size=2, return_indices=True)
+        self.deconv2 = nn.ConvTranspose2d(50, 20, 5, 1)
+        self.mup1 = nn.MaxUnpool2d(kernel_size=2)
+        self.deconv1 = nn.ConvTranspose2d(20, 1, 5, 1)
 
     #======================[ Reverse Task ]==============================
     def forward(self, x):
         return self.interm_to_input(x)
 
     def interm_to_input(self, x):
-        h3 = F.relu(self.fc1(x))
-        return torch.sigmoid(self.fc2(h3))
-
+        x, ind = self.mp1(x)
+        h1 = F.relu(self.conv2(x))
+        h2 = F.relu(self.deconv2(h1))
+        h3 = self.mup1(h2, ind)
+        return torch.sigmoid(self.deconv1(h3))
 
 
 class CNet(nn.Module):
     """
-    Client Model  -- adopts the front end of the fragmented task netork
+    Client Model  -- adopts the front end of the fragmented task network
     """
     def __init__(self, weight, bias):
         super(CNet, self).__init__()
@@ -79,7 +85,6 @@ class CNet(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2, 2)
         return x
     
 
@@ -140,7 +145,7 @@ def train_reverse(args, r_model, c_model, device, train_loader, optimizer, epoch
         data = data.to(device)
         optimizer.zero_grad()
 
-        interm = c_model(data).view(-1, 20*12*12)
+        interm = c_model(data)
         recon_batch = r_model(interm)
 
         loss = loss_function(recon_batch, data)
@@ -164,7 +169,7 @@ def test_reverse(args, c_model, r_model, device, test_loader, epoch):
         for i, (data, _) in enumerate(test_loader):
             data = data.to(device)
             
-            interm = c_model(data).view(-1, 20*12*12)
+            interm = c_model(data)
             recon_batch = r_model(interm)
 
             test_loss += loss_function(recon_batch, data)
@@ -245,7 +250,7 @@ def main():
     # Create model
     model = Net().to(device)
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
-    optimizer_r = optim.SGD(model.parameters(), lr=1.0, momentum=args.momentum)
+    optimizer_r = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
 
 
     # Performance Tracking

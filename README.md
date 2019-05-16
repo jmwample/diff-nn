@@ -1,10 +1,10 @@
 # Just the Facts Please
 
-Conv2d to MLP
+Conv2d => Conv2d
 
-Client segnment of the model involves Conv2d and Maxpool2d operations.
+Client segnment of the model involves Conv2d operation.
 
-The reverse model uses two fully connected layers to reconstruct the original image.
+The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers to reconstruct the original image.
 
 ![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/diffnn_framework.png)
 
@@ -93,3 +93,5 @@ non-specialized hardware.
 
 * Can we construct the client side model fragment to be transferable to related classification tasks
 without directly revealing information about the client?
+
+* How hard is it to undo operations like conv / Maxpool without indices?
