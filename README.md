@@ -100,7 +100,7 @@ without directly revealing information about the client?
 
 ## Current Tests
 
-MLP => MLP -- `mlp-mlp.py`
+MLP => MLP -- `test_mlp-mlp.py`
 
 The split of the original model gives a **MLP** for the client to compute
 
@@ -108,7 +108,7 @@ The reverse task uses two fully connected **MLP** layers to recreate the origina
 
 ---
 
-MLP => Conv2d -- `mlp-conv.py`
+MLP => Conv2d -- `test_mlp-conv.py`
 
 Client segnment of the model involves MLP linear layer operation.
 
@@ -116,7 +116,7 @@ The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers t
 
 ---
 
-Conv2d => MLP -- `conv-mlp.py`
+Conv2d => MLP -- `test_conv-mlp.py`
 
 Client segnment of the model involves Conv2d and Maxpool2d operations.
 
@@ -124,7 +124,7 @@ The reverse model uses two fully connected layers to reconstruct the original im
 
 ---
 
-Conv2d => Conv2d
+Conv2d => Conv2d -- `test_conv-conv.py`
 
 Client segnment of the model involves Conv2d operation.
 
