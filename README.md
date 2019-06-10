@@ -1,11 +1,5 @@
 # Just the Facts Please
 
-Conv2d => Conv2d
-
-Client segnment of the model involves Conv2d operation.
-
-The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers to reconstruct the original image.
-
 ![Framework](https://raw.githubusercontent.com/jmwample/diff-nn/master/img/diffnn_framework.png)
 
 **(Step 1)** involves the __design and training of a model__ -- part of which
@@ -73,6 +67,9 @@ Conv2d Client => [maxpool, conv2d, deconv2d, maxunpool, deconv2d] Reconstruction
 
 ![](https://raw.githubusercontent.com/jmwample/diff-nn/conv-conv/img/reconstruction_10_cc.png)
 
+MLP Client => [maxpool, conv2d, deconv2d, maxunpool, deconv2d] Reconstruction:
+
+![](https://raw.githubusercontent.com/jmwample/diff-nn/mlp-conv/img/reconstruction_10_lc.png)
 
 ## Discussion
 
@@ -100,3 +97,34 @@ non-specialized hardware.
 without directly revealing information about the client?
 
 * How hard is it to undo operations like conv / Maxpool without indices?
+
+## Current Tests
+
+MLP => MLP -- `mlp-mlp.py`
+
+The split of the original model gives a **MLP** for the client to compute
+
+The reverse task uses two fully connected **MLP** layers to recreate the original Sample
+
+---
+
+MLP => Conv2d -- `mlp-conv.py`
+
+Client segnment of the model involves MLP linear layer operation.
+
+The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers to reconstruct the original image.
+---
+
+Conv2d => MLP -- `conv-mlp.py`
+
+Client segnment of the model involves Conv2d and Maxpool2d operations.
+
+The reverse model uses two fully connected layers to reconstruct the original image.
+
+---
+
+Conv2d => Conv2d
+
+Client segnment of the model involves Conv2d operation.
+
+The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers to reconstruct the original image.
