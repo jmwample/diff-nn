@@ -113,6 +113,7 @@ MLP => Conv2d -- `mlp-conv.py`
 Client segnment of the model involves MLP linear layer operation.
 
 The reverse model uses [maxpool, conv2d, deconv2d, maxunpool, deconv2d] layers to reconstruct the original image.
+
 ---
 
 Conv2d => MLP -- `conv-mlp.py`

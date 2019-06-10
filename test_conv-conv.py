@@ -181,7 +181,7 @@ def test_reverse(args, c_model, r_model, device, test_loader, epoch):
                 recon_sample = recon_batch.view(args.test_batch_size, 1, 28, 28)[:n]
                 comparison = torch.cat([ data_sample, recon_sample ])
                 save_image(comparison.cpu(),
-                         'results/reconstruction_' + str(epoch) + '.png', nrow=n)
+                         'results/reconstruction_' + str(epoch) + '_cc.png', nrow=n)
 
     test_loss /= len(test_loader.dataset)
     print('====> Test set loss: {:.4f}'.format(test_loss))
@@ -292,7 +292,7 @@ def main():
     # c_duration = np.arange(-2, 2, dx)
 
     # Evaluate
-    with open("stats/client_times_cl", 'w') as csvf:
+    with open("stats/client_times_cc", 'w') as csvf:
         csv_writer = csv.writer(csvf)
         csv_writer.writerow(c_duration)
 
