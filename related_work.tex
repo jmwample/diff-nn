@@ -1,0 +1,21 @@
+\section{Related Work}
+
+The work attempts to address a different from Papernot \textit{et. al.} as they evaluate the ability to
+train a neural network on differentially private data~\cite{papernot2016semi}. We instead rely on a network
+that has already been trained and attempt to secure the inputs to that network from an untrusted service
+provider. We also not that this method is fundamentally different from Bonawitz \textit{et. al.} as their 
+technique seeks to accomplish secure, differentially private aggregation of data only using multi-party
+computation~\cite{bonawitz2017practical}.
+
+In this work we adopt a similar motivation to private classification techniques like Gilad \textit{et. al.} and 
+Chou \textit{et. al.} however we propose removing the requirement for cryptographic assurance of privacy 
+making performance and limited trust defining characteristic
+differences~\cite{gilad2016cryptonets,chou2018faster,chabanne2017privacy}. The relaxed constraints
+of model fragmentation based techniques give a major enhancement over homomorphic models as machines 
+can be arbitrarily complex with no depth limitation. This explodes the number of tasks that can be 
+accomplished privately without significantly increasing the overhead of the machine. 
+
+
+Other related work~\cite{yuan2014privacy,barni2006privacy,orlandi2007oblivious,chen2009privacy}
+
+\FigFragmentMany

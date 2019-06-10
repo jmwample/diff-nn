@@ -1,0 +1,16 @@
+\section{Evaluation Metrics}
+
+We aim to demonstrate a task agnostic property of this technique by evaluating its effect 
+on various models accomplishing disparate tasks. This can include image recognition tasks
+such as MNIST or Imagenet, language comprehension tasks such as machine translation or 
+text summarization, or tasks in alternative domains such as medical diagnostics or advertising.
+
+We intend to measure the ability of the service provider to invert the fragment of the model 
+that the client possesses using maximum a posteriori (MAP) estimators~\cite{fredrikson2015model}, 
+variational autoencoders~\cite{doersch2016tutorial}, or other techniques.
+
+To evaluate the efficacy and efficiency of the techniques outlined above we intend to compare
+performance of this method on both the client and service provider. Performance elements include
+classification delay, operations per second on both user and service provider, network 
+load (i.e. size and frequency of communications), and theoretical throughput for a service 
+that requires near real time data. 

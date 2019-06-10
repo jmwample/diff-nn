@@ -1,0 +1,33 @@
+\section{Introduction}
+
+Many internet services leverage neural networks make classifications on data that consumers
+might consider private. However, any data that a user submits may be used in future networks, sold to 
+third parties, or redistributed arbitrarily if the service becomes compromised.
+
+With this work we aim to demonstrate that privacy preserving classification can be made by services
+which use neural networks by migrating a portion of the learning process to the client. 
+Fragmenting the neural network models in this way creates a paradigm where a client is sending 
+a low dimensional manifold representation of their data to the service such that the service 
+will be unlikely to accurately reconstruct the exact input. 
+
+In concert with this we intend to test other methods for increasing the cost of model
+inversion to make it more difficult for an untrustworthy service to reconstruct a
+sensitive sample from a user. We consider using probabilistic methods similar to Google's 
+RAPPOR project on classification input data while balancing against and classification
+errors that this induces. 
+
+While these methodologies are by no means cryptographically secure means of querying a 
+neural network service without revealing the input data, we rely in the intuition that a 
+a manifold representation of the input optimized for a specific task will prevent direct 
+leakage to third parties for unrelated tasks. Similarly if the service becomes compromised, 
+either internally or externally, there is no first hand personally identifiable information (PII) 
+directly available. 
+
+\subsection{Threat Model}
+The thread model that this work adopts relies on a user and a service provider model. The 
+service provider gives access a prediction model reliant on a multi-layer neural network 
+that was trained on a data-set known to the provider. 
+This service can be queried as an oracle by a number of users with (potentially sensitive)
+data that they provide. Imagine a network of independent hospitals that would like to use a
+prediction service to analyze patient health data - in this scenario there are restrictions
+on the ability to share the relevant data based on its sensitivity. 

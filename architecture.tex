@@ -1,0 +1,35 @@
+\section{Architecture}
+
+\FigFragmentSingle
+
+The network modifications that we propose are constructed as follows.
+
+\textbf{Model Fragmentation --}
+We propose splitting a trained neural network into two pieces, or designing a neural 
+network (recurrent or otherwise) to have two pieces, one of which can be transferred
+to the client. When a users wishes to make use of the classification of the service they
+first process their input through the piece of the model locally to translate the input
+to a low dimensional manifold representation that is (theoretically) specially trained
+for the one specific classification task. This pre-processsing the on the client side 
+creates a barrier to translating an input to an unrelated task by essentially compressing
+the input to relevant features. This can also be thought of as an encoder on the client
+side, giving every client an ability to balance computational expense against privacy 
+concerns.
+
+
+\textbf{Model Inversion Resistance --}
+To further protect the privacy of user data we attempt to increase the difficulty of
+model inversion attacks. That is, a service provider who receives a low order 
+representation input from a user should not be able to restore that input to full
+fidelity outside of the context of the classification task that they are performing. 
+We attempt to increase the difficulty of this task while maintaining the fidelity of
+of the classification overall. To this end we will investigate the addition of stochastic
+noise, and/or probabilistically dropping features from the input vector -- operations 
+which are not easily reversed with high accuracy.
+
+\medskip
+Our intention is to design these constructions such that they can be applied generically
+to arbitrary neural networks models. In this way we construct models for arbitrary
+classification tasks, or adjust existing modes, such that a user is able to make 
+classifications under relaxed differentially private gurantees.
+
